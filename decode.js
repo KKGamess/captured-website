@@ -2,8 +2,11 @@
 const urlParams = new URLSearchParams(window.location.search);
 const htmlContent = urlParams.get('content');
 
-// Get the target <div> element by its ID
-const targetDiv = document.getElementById('target-div');
+// Create a new HTML document
+const newDoc = document.implementation.createHTMLDocument();
+newDoc.documentElement.innerHTML = decodeURIComponent(htmlContent);
 
-// Set the innerHTML of the target <div> to the cloned HTML content
-targetDiv.innerHTML = decodeURIComponent(htmlContent);
+// Replace the current HTML document with the cloned HTML document
+document.open();
+document.write(newDoc.documentElement.outerHTML);
+document.close();
